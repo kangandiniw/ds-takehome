@@ -50,15 +50,3 @@ cal_plot <- ggplot(calib_data, aes(x = avg_pred, y = avg_actual)) +
 # Menampilkan dan menyimpan grafik
 print(cal_plot)
 ggsave("calibration_curve.png", plot = cal_plot, width = 6, height = 4)
-
-# Skor Kredit: Konversi dari probabilitas
-score_card <- function(prob, min_score = 300, max_score = 850) {
-  min_score + (max_score - min_score) * (1 - prob)
-}
-
-# Hitung skor & cut-off untuk default <= 5%
-data$score <- score_card(data$predicted_prob)
-threshold_score <- min(data$score[data$predicted_prob <= 0.05])
-
-cat("\n--- Cut-off Score untuk Expected Default ≤ 5% ---\n")
-print(threshold_score)
