@@ -85,7 +85,21 @@ GROUP BY decoy_noise
 HAVING COUNT(*) = 1
 ORDER BY freq ASC, decoy_noise ASC;
 
+-- 3. Repeat Purchase Bulanan
+-- ============================================================================
+-- Tujuan:
+-- Menemukan pelanggan yang membeli lebih dari satu kali dalam satu bulan.
+-- Evaluasi performa query juga dilakukan dengan EXPLAIN ANALYZE.
 
+EXPLAIN ANALYZE -- EXPLAIN ANALYZE ditambahkan pada saat mencari evaluasi performa query
+SELECT -- Menemukan pelanggan yang membeli lebih dari satu kali dalam satu bulan.
+    DATE_TRUNC('month', order_date) AS purchase_month,
+    customer_id,
+    COUNT(*) AS order_count
+FROM e_commerce_transactions
+GROUP BY purchase_month, customer_id
+HAVING COUNT(*) > 1
+ORDER BY purchase_month, customer_id;
 
 
 
