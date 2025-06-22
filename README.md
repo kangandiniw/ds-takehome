@@ -1,7 +1,5 @@
 # ds-takehome
 
-## Data Scientist Test – SQL, Python, R
-
 
 ## Struktur Folder
 ├── data/
